@@ -16,7 +16,7 @@ secret trong repository.
 
 | Mục | Nội dung |
 |-----|----------|
-| Public URL | https://day12-chat-m7xz.onrender.com |
+| Public URL | https://day12-chat-3qxa.onrender.com |
 | Platform | Render Blueprint, Docker runtime |
 | Ngày deploy và xác minh | 2026-08-10 |
 | Web service | `day12-chat` |
