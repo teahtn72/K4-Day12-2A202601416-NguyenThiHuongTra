@@ -13,6 +13,7 @@ import json
 import redis
 
 from .config import get_settings
+from .logging_utils import emit
 
 HISTORY_MAX_MESSAGES = 12
 HISTORY_TTL_SECONDS = 3 * 24 * 3600
