@@ -52,8 +52,14 @@ class ChatStore:
         (mất mạng, sai mật khẩu, Redis chưa khởi động...).
         """
         try:
-            return self.client.ping()
-        except Exception:
+            return bool(self.client.ping())
+        except Exception as exc:
+            emit(
+                "redis_ping_failed",
+                severity="ERROR",
+                error_type=type(exc).__name__,
+                error=str(exc),
+            )
             return False
 
     def add_turn(self, client_id: str, role: str, content: str) -> None:
