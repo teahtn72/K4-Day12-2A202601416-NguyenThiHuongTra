@@ -6,7 +6,7 @@
 > Cách trả lời: thay dòng `> *Câu trả lời của bạn*` bằng câu trả lời.
 > `grade.py` đếm số câu đã trả lời (15 điểm cho 10 câu).
 >
-> Họ và tên: ..........................  Mã học viên: ..........................
+> Họ và tên: Nguyễn Thị Hương Trà .Mã học viên: 2A202601416
 
 ---
 
@@ -17,7 +17,7 @@ khởi động nếu thiếu biến môi trường. Hãy mô tả một tình hu
 "chết sớm" này cứu bạn, so với việc để mặc định `"changeme"`.
 
 > *Câu trả lời của bạn*
-
+Hacker có thể tìm ra được giá trị "changeme" trong source code và lợi dụng nó.
 ---
 
 ### Câu 2 — Log cho máy đọc (CP1)
@@ -27,7 +27,10 @@ nêu **hai** việc bạn làm được với dòng log đó mà `print("đã tr
 không làm được.
 
 > *Câu trả lời của bạn*
-
+{"reply":"Với Tin nhắn thứ 2, cách làm phổ biến trong production là đặt một lớp gateway phía trước để lo authentication, rate limiting và bảo vệ chi phí. (Mình đang nhớ 4 lượt trao đổi trước đó.)","client_id":"smoke-test","turns_before":4,"usd_cost":4.155e-05,"usage":{"prompt":93,"completion":46}}
+Với dòng log này, mình có thể:
+1. Filter và truy vết theo trường cụ thể, ví dụ như client_id và severity. Print thì không có các trường riêng để lọc từ log.
+2. Thống kê và cảnh báo chi phí. Print("đã trả lời xong") chỉ cho biết task đã finished, không cho biết dữ liệu để action.
 ---
 
 ### Câu 3 — Kích thước image (CP2)
@@ -42,13 +45,11 @@ docker images | grep chat
 
 | Bản | Dung lượng |
 |-----|-----------|
-| 1 stage (bản đầu) | ... MB |
-| Multi-stage | ... MB |
-
+| 1 stage (bản đầu) | khoảng 1.300 MB |
+| Multi-stage | 296 MB (content size 63,8 MB) |
 Giải thích: phần dung lượng chênh lệch đó là những gì?
-
 > *Câu trả lời của bạn*
-
+Phần chênh lệch chủ yếu là base image Python đầy đủ, công cụ build/compiler, cache và các file trung gian chỉ cần lúc cài dependency. Stage runtime chỉ giữ Python slim, dependency đã cài và source code cần để chạy service.
 ---
 
 ### Câu 4 — Thứ tự lệnh trong Dockerfile (CP2)
