@@ -40,16 +40,16 @@ services:
   #   ...
   chat:
     build: .
-    expose:
-      - "8000"
+    ports:
+      - "8000:8000"
     environment:
       - API_TOKEN=${API_TOKEN:?set API_TOKEN in .env}
-      - REDIS_URL=redis://red-d9sqj1vavr4c73bdpko0:SQ7rbPT3s6kbRi8xSf3jyWNzhoGRF0Za@red-d9sqj1vavr4c73bdpko0:6379
+      - REDIS_URL=redis://redis:6379/0
     depends_on:
       redis:
         condition: service_healthy
     healthcheck:
-      test: ["CMD", "python", "-c", "import os, urllib.request; port = os.getenv('PORT', '8000'); urllib.request.urlopen(f'http://127.0.0.1:{port}/health', timeout=3)"]
+      test: ["CMD", "python", "-c", "import os, urllib.request; port = os.getenv('PORT', '8000'); urllib.request.urlopen(f'http://127.0.0.1:{port}/healthz', timeout=3)"]
       interval: 10s
       timeout: 3s
       retries: 5
