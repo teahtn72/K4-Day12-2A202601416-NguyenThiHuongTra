@@ -32,6 +32,8 @@ RUN pip install --no-cache-dir --prefix=/install -r requirements.txt
 # ---- Stage 2: Production ----
 FROM python:3.11-slim
 WORKDIR /app
+ENV PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1
 COPY --from=builder /install /usr/local
 COPY app/ app/
 COPY utils/ utils/

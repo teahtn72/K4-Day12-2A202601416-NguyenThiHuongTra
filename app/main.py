@@ -16,7 +16,7 @@ from __future__ import annotations
 from contextlib import asynccontextmanager
 from functools import lru_cache
 
-from fastapi import Depends, FastAPI
+from fastapi import Depends, FastAPI, HTTPException, status
 from fastapi.responses import JSONResponse
 from pydantic import BaseModel, Field
 
@@ -41,7 +41,19 @@ SERVICE_VERSION = "1.0.0"
 # ─────────────────────────────────────────────────────────────
 @lru_cache(maxsize=1)
 def get_store() -> ChatStore:
-    return ChatStore(get_redis_client())
+    try:
+        return ChatStore(get_redis_client())
+    except Exception as exc:
+        emit(
+            "redis_client_init_failed",
+            severity="ERROR",
+            error_type=type(exc).__name__,
+            error=str(exc),
+        )
+        raise HTTPException(
+            status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
+            detail="redis unavailable",
+        ) from exc
 
 
 @lru_cache(maxsize=1)
