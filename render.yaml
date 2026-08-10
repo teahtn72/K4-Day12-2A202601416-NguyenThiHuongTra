@@ -10,6 +10,7 @@ services:
     dockerfilePath: ./Dockerfile
     plan: free
     healthCheckPath: /healthz
+    readyCheckPath: /readyz
     envVars:
       - key: API_TOKEN
         sync: false
