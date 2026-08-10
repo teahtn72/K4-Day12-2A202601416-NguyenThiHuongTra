@@ -34,6 +34,13 @@ class Settings(BaseSettings):
     hiện ra khi ai đó đã gọi API miễn phí bằng token mặc định đó. Không mặc
     định = fail fast ngay lúc khởi động.
     """
+    port: int = 8000
+    api_token: str
+    redis_url: str = "redis://localhost:6379/0"
+    bucket_capacity: int = 10
+    refill_per_minute: int = 10
+    daily_budget_usd: float = 1.0
+    log_level: str = "INFO"
 
     model_config = SettingsConfigDict(
         env_file=".env",
